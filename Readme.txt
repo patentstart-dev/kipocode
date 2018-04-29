@@ -1,0 +1,1 @@
+Code for Checking the KIPO CODE @ patent.go.kr

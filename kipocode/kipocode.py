@@ -16,7 +16,8 @@ def kipocode_get(person_type, socialcode):
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
     options.add_argument('window-size=1920x1080')
-    options.add_argument("disable-gpu")
+    options.add_argument('disable-gpu')
+    options.add_argument('--ignore-certificate-errors')
 
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     ROOT_DIR = os.path.dirname(BASE_DIR)
@@ -55,15 +56,28 @@ def kipocode_get(person_type, socialcode):
         resid2s[0].send_keys(socialcode.split("-")[1])
 
         # 이전 창 데이터
-        # window_before = driver.window_handles[0]
-        # print(window_before)
+        window_before = driver.window_handles[0]
+        print(window_before)
 
         # 실행버튼
         driver.execute_script("apagtCdCheck(); return false;")
 
         # 팝업 윈도우 이동
-        driver.switch_to.window("apagtCdCheck")
+        window_child = driver.window_handles[1]
+               
+        try:
+            wait3 = WebDriverWait(driver, 1)
+            element3 = wait3.until(EC.visibility_of_element_located((By.ID, 'pop_content')))
+            print("switch wait")
+        except:
+            print("switch non wait")
+        
+        driver.switch_to.window(window_child)
+        
+        print("switch success")
 
+               
+        
         # 크롤링
         html=driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
@@ -101,8 +115,19 @@ def kipocode_get(person_type, socialcode):
         # 실행버튼
         driver.execute_script("apagtCdCheck(); return false;")
 
-        # 윈도우 이동
-        driver.switch_to.window("apagtCdCheck")
+        # 팝업 윈도우 이동
+        window_child = driver.window_handles[1]
+               
+        try:
+            wait3 = WebDriverWait(driver, 1)
+            element3 = wait3.until(EC.visibility_of_element_located((By.ID, 'pop_content')))
+            print("switch wait")
+        except:
+            print("switch non wait")
+        
+        driver.switch_to.window(window_child)
+        
+        print("switch success")
 
         # 크롤링
         html=driver.page_source

@@ -24,10 +24,8 @@ def kipocode_get(person_type, socialcode):
     CHROME_DIR = os.path.join(BASE_DIR,'chromedriver')
 
     # headless 크롬 드라이버를 이용한 접속
-    #driver = webdriver.Chrome(CHROME_DIR, chrome_options=options)
-    driver = webdriver.Chrome(chrome_options=options)
-
-
+    driver = webdriver.Chrome(CHROME_DIR, chrome_options=options)
+    
     # url에 접근한다.
     driver.get('https://www.patent.go.kr/jsp/ka/prestep/codeapp/CodeAppView.do')
 
@@ -89,9 +87,6 @@ def kipocode_get(person_type, socialcode):
 
         # 모든 윈도우 종료
         driver.quit()
-
-        #driver.switch_to.window(window_before)
-        #driver.close()
 
         return kipocode
 

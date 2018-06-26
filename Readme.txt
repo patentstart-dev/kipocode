@@ -1,7 +1,10 @@
 Code for Checking the KIPO CODE @ patent.go.kr
 
-WINDOWS SERVER ±¸µ¿Á¶°Ç : 
-1. python\script¿¡ °³º°ÀûÀ¸·Î chromedriver.exe ÆÄÀÏÀ» ÀúÀåÇØ µÎ¾î¾ßÇÔ
+WINDOWS SERVER êµ¬ë™ì¡°ê±´ : 
 
-2. patent.go.kr¿¡ Á¢¼ÓÇÏ±â À§ÇØ ÇÊ¿äÇÑ º¸¾ÈÇÁ·Î±×·¥Àº °³º°ÀûÀ¸·Î ¼³Ä¡
+1. python\scriptì— ê°œë³„ì ìœ¼ë¡œ chromedriver.exe íŒŒì¼ì„ ì €ìž¥í•´ ë‘ì–´ì•¼í•¨
+
+2. 
+
+
 

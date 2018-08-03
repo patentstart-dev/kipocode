@@ -1,0 +1,269 @@
+
+<div class="section">
+
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="col s12 valign-wrapper center-align" id="box_row1">
+          <span class="center-align" id="text_row1"><h4>&nbsp;</h4></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 valign-wrapper center-align" id="box_row2">
+          <span id="text_row2"><h4>&nbsp;</h4></span>
+        </div>
+      </div>
+
+     <!-- 로딩 이미지 -->
+
+      <div class="row">
+        <div id="loading">
+          <div class="progress">
+            <div class="indeterminate"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12 valign-wrapper center-align" id="box_row3">
+          <span id="text_row3"><h5>&nbsp;</h5></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="divide"></div>
+
+<!--<form action="" method="POST">{% csrf_token %}-->
+
+<div class="section">
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="col s4">
+          <input class="person_type_radio with-ga disablable" type="radio" id="person_type_radio_1"
+                   name="person_type" value="individual" checked="checked">
+          <label for="person_type_radio_1">개인</label>
+          <input class="person_type_radio with-gap disablable" type="radio" id="person_type_radio_2"
+                   name="person_type" value="corporate">
+          <label for="person_type_radio_2">법인</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s4">
+          <input class="disablable" placeholder="앞의 여섯자리를 입력하세요" type="text" id="num1" name="num1" maxlength="6">
+          <label for="num1">앞여섯자리</label>
+        </div>
+        <div class="input-field col s1">
+          -
+        </div>
+        <div class="input-field col s4">
+          <input class="disablable" placeholder="뒤의 일곱자리를 입력하세요" type="text" id="num2" name="num2" maxlength="7">
+          <label for="num1">뒤일곱자리</label>
+        </div>
+        <div class="input-field col s3">
+          <button class="btn waves-effect waves-light" id="check">체크
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s10 m10 l5" id="input_box">
+      <div class="">
+          <div class="input-field">
+              {# different form person page #}
+
+                  {# 한글 성명 #}
+                  <div id="kor_name_input" class="name_only_input all_field_input">
+                      <div class="input-field">
+                          <input type="text" id="kor_name">
+                          <label for="kor_name">한글성명</label>
+                      </div>
+                  </div>
+
+                  {# 영문 성명 #}
+                  <div id="eng_name_input" class="all_field_input">
+                      <div class="input-field">
+                          <input type="text" id="eng_name">
+                          <label for="eng_name">영문성명</label>
+                      </div>
+                  </div>
+
+                  <br>
+
+                  {# 주소 #}
+                  <div id="address_input" class="all_field_input">
+                      <input class="btn" type="button" onclick="getPostcode()" value="주소 검색">
+                      <div class="input-field">
+                        <input type="text" id="address1">
+                        <label for="address1">주소1</label>
+                      </div>
+
+                      <div class="input-field">
+                        <input type="text" id="address2">
+                        <label for="address2">주소2</label>
+                      </div>
+                  </div>
+
+                  {# 전화번호 #}
+                  <div id="phone_number_input" class="all_field_input">
+                      <div class="input-field">
+                          <input type="tel" name="" maxlength="17"
+                                 id="phone_number"
+                                 pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}">
+                          <label for="phone_number">전화번호</label>
+                      </div>
+                  </div>
+
+                  {# 메일 #}
+                  <div id="email_input" class="all_field_input">
+                      <div class="input-field">
+                        <input type="text" id="email">
+                        <label for="email">email</label>
+                      </div>
+                  </div>
+
+
+                {# 특허고객번호 #}
+                  <div id="kipocode_input" class="hidden_input">
+                      <div class="input-field">
+                        <input type="text" id="kipo_code">
+                        <label for="kipo_code">kipo_code</label>
+                      </div>
+                  </div>
+
+                  <button class="btn waves-effect waves-light red lighten-2 right" type="submit">
+                      저장 <i class="material-icons right">send</i>
+                  </button>
+
+                  <br>
+                  <br>
+
+          </div>
+      </div>
+  </div>
+</div>
+<!--</form>-->
+
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
+<script type="text/javascript">
+
+  // 초기화 세팅
+
+  $("#loading").hide();
+
+  $('#text_row2').html("<h4>개인 또는 법인을 선택하고, 주민번호 또는 법인번호를 입력하세요</h4>");
+  $('#text_row3').html("<h5>체크 버튼을 누르면 특허청 조회가 시작됩니다.</h5>");
+
+  $("#input_box").hide()
+  $(".hidden_input").hide()
+  $(".all_field_input").hide()
+
+  // ** 특허청 특허고객번호 체크 진행 ** //
+
+  $("#check").click(function(){
+    var numsum = $("#num1").val() + "-" + $("#num2").val();
+    var person_type = $(':radio[name="person_type"]:checked').val();
+
+    // 1. 유효성 체크 진행
+
+
+    // 2. 특허청 체크 진행
+
+    $('#text_row2').html("<h4>&nbsp;</h4>");
+    $('#text_row3').html("<h5>특허청의 조회를 시작합니다.</h5>");
+    $("#loading").show();
+    $("#check").hide();
+
+    // 3. ajax 통신 시작
+
+    $.ajax({
+      type:"POST",
+      url:"http://13.209.50.19:8000/kipocode/",
+      // url:"http://13.125.248.220:8000/kipocode/",
+      // url:"http://localhost:8000/kipocode/",
+      dataType: "json",
+      data: {'socialcode' : numsum, 'person_type' : person_type},
+
+      // 만일, csrf를 구축하는 경우 아래의 코드를 참조. 아직 구현해보지는 않음
+      // data: {'socialcode' : numsum, 'person_type' : 'individual', 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+
+      async: true,
+      timeout:20000,
+
+      // 3-1. 조회에 실패한 경우
+
+      error: (function(x,s,e){
+
+        $('#text_row3').html("<h5>특허청의 조회에 실패하였습니다. 다시 진행해 주세요.</h5>");
+        $("#loading").hide();
+        $("#check").show();
+
+      }),
+
+      // 3-2. 조회에 성공한 경우
+
+      success: (function(x,s,e){
+        $('#text_row3').html("<h5>특허청의 조회에 성공하였습니다.</h5>");
+      }),
+
+      // 3-3. 조회에 성공한 경우
+
+      complete: (function(response, status, error){
+        kipocode = JSON.parse(response.responseText).kipocode;
+
+        if (kipocode == "NONE") {
+
+          // 3-3-1. 조회했는데, 코드 없는 경우
+
+          $("#text_row2").html("<h4>고객님의 특허고객번호는 없습니다.</h4>");
+          $("#text_row3").html("<h5>아래의 모든 사항을 기재하고 진행버튼을 눌러 주세요.</h5>");
+          $("#loading").hide();
+          $(".disablable").attr("disabled","disabled");
+
+          // 모든 데이터 표시
+          $("#input_box").show();
+          $(".all_field_input").show();
+
+        } else {
+
+          // 3-3-2. 조회했는데, 코드 있는 경우
+
+          $("#text_row2").html("<h4>고객님의 특허고객번호는 "+kipocode+" 입니다.</h4>");
+          $("#text_row3").html("<h5>성명(법인명)을 기재하고 진행버튼을 눌러 주세요.</h5>");
+          $("#loading").hide();
+          $(".disablable").attr("disabled","disabled");
+          $("#kipo_code").attr("value",kipocode);
+
+          // 이름만 표시
+          $("#input_box").show();
+          $(".name_only_input").show();
+
+        }
+        //if (kipocode === "NONE") {          alert("KIPOCODE NONE");
+        //      } else {          alert("KIPOCODE : "+kipocode);        },
+
+      }),
+    });
+    // request.done(function(resonse){
+    //  kipocode = JSON.parse(response.responseText).kipocode;
+    //  $("#results").text("특허고객번호는"+kipocode+"입니다.");
+    // });
+
+    //request.fail(function(jqXHR, status){
+    // $("#results").text("조회에 실패하였습니다. 잠시후 다시 진행하여 주십시오. 문제가 계속되는 경우 고객센터에 연락하여 주십시오.");
+    //});
+
+  })
+</script>

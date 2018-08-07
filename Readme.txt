@@ -4,6 +4,11 @@ Code for Checking the KIPO CODE @ patent.go.kr
 
 구동 조건
 
+<ubuntu 초기 서버 기준>
+
+0. python3 설치 & virtualenv 설치
+
+
 1. requirement.txt 설치
 
 

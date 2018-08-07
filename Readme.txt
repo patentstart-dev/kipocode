@@ -30,6 +30,19 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt-get -f install ./google-chrome-stable_current_amd64.deb
 
 
+<독립적인 구동>
+
+개별구동을 위하여 임시적으로 linux screen 명령어를 사용함
+
+추후 배포 방법을 찾아야 함.
+
+screen 명령어 : crtl+a 이후에 d
+
+(터미널 종료 가능)
+
+회복 : (이후 접속 후에) screen -r
+
+
 
 
 
